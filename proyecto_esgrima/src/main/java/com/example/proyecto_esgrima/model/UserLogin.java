@@ -1,4 +1,4 @@
-package com.example.proyecte_esgrima.model;
+package com.example.proyecto_esgrima.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 
 
-@Document
+@Document(collection = "userCredentials")
 public class UserLogin {
 	
 	@Id

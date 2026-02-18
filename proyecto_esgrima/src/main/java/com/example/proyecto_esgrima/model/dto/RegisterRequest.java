@@ -1,6 +1,6 @@
-package com.example.proyecte_esgrima.model.dto;
+package com.example.proyecto_esgrima.model.dto;
 
-import com.example.proyecte_esgrima.model.Role;
+import com.example.proyecto_esgrima.model.Role;
 
 public class RegisterRequest {
 	

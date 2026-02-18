@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.example.proyecte_esgrima.model.UserLogin;
+import com.example.proyecto_esgrima.model.UserLogin;
 import com.example.proyecto_esgrima.repository.UserLoginRepository;
 
 @Service

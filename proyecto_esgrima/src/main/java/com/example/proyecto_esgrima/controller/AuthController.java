@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.proyecte_esgrima.model.UserLogin;
-import com.example.proyecte_esgrima.model.dto.LoginRequest;
-import com.example.proyecte_esgrima.model.dto.RegisterRequest;
+import com.example.proyecto_esgrima.model.UserLogin;
+import com.example.proyecto_esgrima.model.dto.LoginRequest;
+import com.example.proyecto_esgrima.model.dto.RegisterRequest;
 import com.example.proyecto_esgrima.repository.UserLoginRepository;
 import com.example.proyecto_esgrima.security.JwtUtil;
 

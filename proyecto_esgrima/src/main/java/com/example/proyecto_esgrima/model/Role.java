@@ -1,4 +1,4 @@
-package com.example.proyecte_esgrima.model;
+package com.example.proyecto_esgrima.model;
 
 public enum Role {
 
