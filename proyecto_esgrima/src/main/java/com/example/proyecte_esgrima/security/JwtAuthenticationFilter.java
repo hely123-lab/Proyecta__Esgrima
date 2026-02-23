@@ -1,4 +1,4 @@
-package com.example.proyecto_esgrima.security;
+package com.example.proyecte_esgrima.security;
 
 import java.io.IOException;
 

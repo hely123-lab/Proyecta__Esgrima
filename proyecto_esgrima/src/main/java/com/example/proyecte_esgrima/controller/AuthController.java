@@ -1,4 +1,4 @@
-package com.example.proyecto_esgrima.controller;
+package com.example.proyecte_esgrima.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.proyecte_esgrima.model.UserLogin;
 import com.example.proyecte_esgrima.model.dto.LoginRequest;
 import com.example.proyecte_esgrima.model.dto.RegisterRequest;
-import com.example.proyecto_esgrima.repository.UserLoginRepository;
-import com.example.proyecto_esgrima.security.JwtUtil;
+import com.example.proyecte_esgrima.repository.UserLoginRepository;
+import com.example.proyecte_esgrima.security.JwtUtil;
 
 
 @RestController

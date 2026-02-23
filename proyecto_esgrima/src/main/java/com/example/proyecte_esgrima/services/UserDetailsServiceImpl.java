@@ -1,4 +1,4 @@
-package com.example.proyecto_esgrima.services;
+package com.example.proyecte_esgrima.services;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.example.proyecte_esgrima.model.UserLogin;
-import com.example.proyecto_esgrima.repository.UserLoginRepository;
+import com.example.proyecte_esgrima.repository.UserLoginRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{

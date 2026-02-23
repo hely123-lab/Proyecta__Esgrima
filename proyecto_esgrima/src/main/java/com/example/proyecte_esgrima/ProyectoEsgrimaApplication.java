@@ -1,4 +1,4 @@
-package com.example.proyecto_esgrima;
+package com.example.proyecte_esgrima;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

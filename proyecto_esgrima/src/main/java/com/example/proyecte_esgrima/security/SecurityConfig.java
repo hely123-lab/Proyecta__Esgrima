@@ -1,4 +1,4 @@
-package com.example.proyecto_esgrima.security;
+package com.example.proyecte_esgrima.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -31,7 +31,6 @@ public class SecurityConfig {
 	           .csrf(csrf -> csrf.disable())
 	           .authorizeHttpRequests(auth -> auth
 	               .requestMatchers("/auth/**").permitAll()
-	               .requestMatchers("/usuaris/**").hasAuthority(Role.ROLE_ADMIN.name())  
 	               .anyRequest().authenticated()
 	           )
 	           .sessionManagement(session ->
