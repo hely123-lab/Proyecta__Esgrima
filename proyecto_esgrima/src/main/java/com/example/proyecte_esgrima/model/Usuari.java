@@ -4,7 +4,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 @Document(collection = "usuaris")
+@Schema(description = "Entitat que representa un usuari de l'aplicació")
 public class Usuari {
 
     @Id
