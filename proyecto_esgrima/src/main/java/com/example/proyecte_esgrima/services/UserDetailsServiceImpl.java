@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.example.proyecte_esgrima.model.UserLogin;
+import com.example.proyecte_esgrima.model.Usuari;
 import com.example.proyecte_esgrima.repository.UserLoginRepository;
 
 @Service
@@ -19,7 +19,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	   @Override
 	   public UserDetails loadUserByUsername(String username)
 	           throws UsernameNotFoundException {
-	       UserLogin user = repo.findByUsername(username)
+	       Usuari user = repo.findByUsername(username)
 	               .orElseThrow(() ->
 	                       new UsernameNotFoundException("Usuari no trobat"));
 	       return new org.springframework.security.core.userdetails.User(

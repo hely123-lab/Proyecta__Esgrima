@@ -1,4 +1,4 @@
-package com.example.proyecte_esgrima.model.enums;
+package com.example.proyecte_esgrima.model;
 
 public enum NivelEsgrimista {
     BASIC,
