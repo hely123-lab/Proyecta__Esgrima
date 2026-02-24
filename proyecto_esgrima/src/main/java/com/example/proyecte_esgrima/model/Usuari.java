@@ -12,7 +12,10 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
-
+/**
+ * Document que representa l'usuari de l'aplicació implementa userDetails per
+ * el login amb security
+ */
 @Document(collection = "usuaris")
 public class Usuari implements UserDetails {
 
