@@ -1,8 +1,9 @@
 package com.example.proyecte_esgrima.model.dto;
 
-import com.example.proyecte_esgrima.model.NivelEsgrimista;
 import jakarta.validation.constraints.*;
 import java.time.LocalDate;
+
+import com.example.proyecte_esgrima.model.enums.NivelEsgrimista;
 
 public class RegisterRequest {
     @NotBlank(message = "El nom és obligatori")

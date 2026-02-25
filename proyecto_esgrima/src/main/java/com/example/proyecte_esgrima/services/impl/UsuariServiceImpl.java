@@ -3,7 +3,7 @@ package com.example.proyecte_esgrima.services.impl;
 
 import com.example.proyecte_esgrima.model.Usuari;
 import com.example.proyecte_esgrima.model.dto.*;
-import com.example.proyecte_esgrima.model.Role;
+import com.example.proyecte_esgrima.model.enums.Role;
 import com.example.proyecte_esgrima.repository.UsuariRepository;
 import com.example.proyecte_esgrima.security.JwtUtil;
 import com.example.proyecte_esgrima.services.UsuariService;

@@ -1,7 +1,7 @@
 package com.example.proyecte_esgrima.services;
 
 import com.example.proyecte_esgrima.model.dto.*;
-import com.example.proyecte_esgrima.model.Role;
+import com.example.proyecte_esgrima.model.enums.Role;
 import com.example.proyecte_esgrima.model.Usuari;
 
 import java.util.List;
