@@ -37,7 +37,7 @@ public class AuthController {
    public ResponseEntity<String> login(@RequestBody LoginRequest request) {
 	   Authentication authentication = authenticationManager.authenticate(
                new UsernamePasswordAuthenticationToken(
-                       request.getUsername(),
+                       request.getEmail(),
                        request.getPassword()
                )
        );
@@ -49,14 +49,13 @@ public class AuthController {
    
    @PostMapping("/register")
    public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
-       if (userRepo.findByUsername(request.getUsername()).isPresent()) {
+       if (userRepo.findByUsername(request.getEmail()).isPresent()) {
            return ResponseEntity.badRequest()
                    .body("Aquest usuari ja existeix");
        }
        Usuari user = new Usuari();
-       user.setEmail(request.getUsername());
+       user.setEmail(request.getEmail());
        user.setPassword(passwordEncoder.encode(request.getPassword()));
-       user.setRol(request.getRole());
        userRepo.save(user);
        return ResponseEntity.ok("Usuari registrat correctament");
    }
