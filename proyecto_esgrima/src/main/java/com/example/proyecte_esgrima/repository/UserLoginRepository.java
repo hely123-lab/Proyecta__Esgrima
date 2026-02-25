@@ -5,12 +5,12 @@ import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.proyecte_esgrima.model.UserLogin;
+import com.example.proyecte_esgrima.model.Usuari;
 
 @Repository
-public interface UserLoginRepository extends MongoRepository<UserLogin, String>{
+public interface UserLoginRepository extends MongoRepository<Usuari, String>{
 	
-	Optional<UserLogin> findByUsername(String username);
+	Optional<Usuari> findByUsername(String username);
 
 
 }

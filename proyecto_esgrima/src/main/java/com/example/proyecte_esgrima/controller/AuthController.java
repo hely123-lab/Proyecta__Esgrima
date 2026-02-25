@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.proyecte_esgrima.model.UserLogin;
+import com.example.proyecte_esgrima.model.Usuari;
 import com.example.proyecte_esgrima.model.dto.LoginRequest;
 import com.example.proyecte_esgrima.model.dto.RegisterRequest;
 import com.example.proyecte_esgrima.repository.UserLoginRepository;
@@ -53,10 +53,10 @@ public class AuthController {
            return ResponseEntity.badRequest()
                    .body("Aquest usuari ja existeix");
        }
-       UserLogin user = new UserLogin();
-       user.setUsername(request.getUsername());
+       Usuari user = new Usuari();
+       user.setEmail(request.getUsername());
        user.setPassword(passwordEncoder.encode(request.getPassword()));
-       user.setRole(request.getRole());
+       user.setRol(request.getRole());
        userRepo.save(user);
        return ResponseEntity.ok("Usuari registrat correctament");
    }
