@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.proyecte_esgrima.model.Usuari;
 import com.example.proyecte_esgrima.model.dto.LoginRequest;
 import com.example.proyecte_esgrima.model.dto.RegisterRequest;
-import com.example.proyecte_esgrima.repository.UserLoginRepository;
+import com.example.proyecte_esgrima.repository.UsuariRepository;
 import com.example.proyecte_esgrima.security.JwtUtil;
 
 
@@ -27,7 +27,7 @@ public class AuthController {
    @Autowired
    private JwtUtil jwtUtil;
    @Autowired
-   private UserLoginRepository userRepo;
+   private UsuariRepository userRepo;
    @Autowired
    private PasswordEncoder passwordEncoder;
 
@@ -49,7 +49,7 @@ public class AuthController {
    
    @PostMapping("/register")
    public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
-       if (userRepo.findByUsername(request.getEmail()).isPresent()) {
+       if (userRepo.findByEmail(request.getEmail()).isPresent()) {
            return ResponseEntity.badRequest()
                    .body("Aquest usuari ja existeix");
        }

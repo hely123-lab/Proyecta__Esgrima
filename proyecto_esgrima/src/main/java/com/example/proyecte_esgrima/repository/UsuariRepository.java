@@ -8,9 +8,10 @@ import org.springframework.stereotype.Repository;
 import com.example.proyecte_esgrima.model.Usuari;
 
 @Repository
-public interface UserLoginRepository extends MongoRepository<Usuari, String>{
+public interface UsuariRepository extends MongoRepository<Usuari, String>{
 	
-	Optional<Usuari> findByUsername(String username);
+	Optional<Usuari> findByEmail(String email);
+    boolean existsByEmail(String email);
 
 
 }
