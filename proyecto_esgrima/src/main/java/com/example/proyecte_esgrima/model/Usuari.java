@@ -1,6 +1,5 @@
 package com.example.proyecte_esgrima.model;
 
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -13,71 +12,131 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Document que representa l'usuari de l'aplicació implementa userDetails per
- * el login amb security
+ * Document que representa l'usuari de l'aplicació implementa userDetails per el
+ * login amb security
  */
 @Document(collection = "usuaris")
 public class Usuari implements UserDetails {
+	/*
+	 * Id unica del document en MongoDB
+	 */
+	@Id
+	private String id;
 
-    @Id
-    private String id;
+	/*
+	 * Nombre y Apellido del Usuari
+	 */
+	private String nom;
+	private String cognoms;
 
-    private String nom;
-    private String cognoms;
+	/*
+	 * Correo electronico del Usuari Es unico dentro de la collecion
+	 */
+	@Indexed(unique = true)
+	private String email;
 
-    @Indexed(unique = true)
-    private String email;
+	/*
+	 * Contraseña del Usuari
+	 */
+	private String password;
 
-    private String password;
+	/*
+	 * Fecha de nacimiento y sexo del Usuario
+	 */
+	private LocalDate dataNaixement;
+	private String sexe;
 
-    private LocalDate dataNaixement;
-    private String sexe;
+	/*
+	 * Nivell esportiu del esgrimista
+	 */
+	private NivelEsgrimista nivell;
 
-    private NivelEsgrimista nivell;
+	/*
+	 * Rol del usuario dentro del sistema (USER o ADMIN)
+	 */
+	private Role rol;
 
-    private Role rol;
-    private boolean actiu = true;
+	/*
+	 * Indica si la cuenta esta activa, Si es fale, el usuario no podra iniciar
+	 * sesion.
+	 */
+	private boolean actiu = true;
 
-    //Constructors
+	/*
+	 * Constructor vacio.
+	 */
+	public Usuari() {
+	}
 
-    public Usuari() {}
-    
-    
+	/*
+	 * Constructor con parametros.
+	 */
+	public Usuari(String nom, String cognoms, String email, String password, LocalDate dataNaixement, String sexe,
+			NivelEsgrimista nivell, Role rol) {
+		this.nom = nom;
+		this.cognoms = cognoms;
+		this.email = email;
+		this.password = password;
+		this.dataNaixement = dataNaixement;
+		this.sexe = sexe;
+		this.nivell = nivell;
+		this.rol = rol;
+		this.actiu = true;
+	}
 
-    public Usuari(String nom, String cognoms, String email, String password,LocalDate dataNaixement, String sexe, NivelEsgrimista nivell,  Role rol) {
-        this.nom = nom;
-        this.cognoms = cognoms;
-        this.email = email;
-        this.password = password;
-        this.dataNaixement = dataNaixement;
-        this.sexe = sexe;
-        this.nivell = nivell;
-        this.rol = rol;
-        this.actiu = true;
-    }
+	/*
+	 * Devuelve los roles del usuario como autoridades de Spring Security
+	 * 
+	 * @return Llista de autoridades baasda en el rol
+	 */
 
-    //UserDetails
-    
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(rol.name()));
-    }
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return List.of(new SimpleGrantedAuthority(rol.name()));
+	}
 
-    @Override
-    public String getUsername() { return email; }
+	/*
+	 * Devuelve el username utilizado por autenticacion En nuestro caso seria el
+	 * email.
+	 */
+	@Override
+	public String getUsername() {
+		return email;
+	}
 
-    @Override
-    public boolean isAccountNonExpired()   { return true;  }
-    @Override
-    public boolean isAccountNonLocked()    { return actiu; }
-    @Override
-    public boolean isCredentialsNonExpired() { return true; }
-    @Override
-    public boolean isEnabled()             { return actiu; }
+	/*
+	 * Indica si la cuenta no ha expirado.
+	 */
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
 
+	/*
+	 * Indica si la cuenta no esta bloqueada. con la variable actiu.
+	 */
+	@Override
+	public boolean isAccountNonLocked() {
+		return actiu;
+	}
 
+	/*
+	 * Indica si las credenciales no han expirado.
+	 */
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
 
-    //Getters i Setters
+	/*
+	 * Indica si la cuenta esta habilitada
+	 */
+	@Override
+	public boolean isEnabled() {
+		return actiu;
+	}
+
+	// Getters i Setters Normales
 	public String getId() {
 		return id;
 	}
@@ -158,7 +217,4 @@ public class Usuari implements UserDetails {
 		this.actiu = actiu;
 	}
 
-
-    
-	
 }
