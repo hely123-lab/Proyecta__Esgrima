@@ -23,12 +23,27 @@ public class PistaCombateResponse {
 	 * ubicación.
 	 */
 	private String descripcio;
+
+	/**
+	 * Tipo de arma asociada a la pista. Representado mediante el enum ArmaEsgrima.
+	 */
 	private ArmaEsgrima tipusArma;
+
+	/**
+	 * Indica si la pista está disponible para su uso.
+	 * 
+	 * true → disponible false → ocupada o no disponible
+	 */
 	private boolean disponible;
+
+	/*
+	 * Constructor vacio.
+	 */
 
 	public PistaCombateResponse() {
 	}
 
+	// Getters y Setters
 	public String getId() {
 		return id;
 	}
