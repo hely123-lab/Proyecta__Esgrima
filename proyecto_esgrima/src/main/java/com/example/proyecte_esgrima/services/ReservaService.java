@@ -8,7 +8,7 @@ import com.example.proyecte_esgrima.model.dto.ReservaRequest;
 
 public interface ReservaService {
 
-    Reserva crearReserva(String esgrimista1Id, ReservaRequest request);
+    Reserva crearReserva(String esgrimista1Id, ReservaRequest request) throws Exception;
     Reserva getById(String id) throws Exception;
     List<Reserva> getHistorialByUsuari(String usuariId);
     List<Reserva> getAll();

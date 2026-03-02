@@ -5,7 +5,7 @@ import com.example.proyecte_esgrima.model.PistaCombate;
 import com.example.proyecte_esgrima.model.Reserva;
 import com.example.proyecte_esgrima.model.dto.ReservaRequest;
 import com.example.proyecte_esgrima.model.enums.EstadoReserva;
-import com.example.proyecte_esgrima.repository.PistaRepository;
+import com.example.proyecte_esgrima.repository.PistaCombateRepository;
 import com.example.proyecte_esgrima.repository.ReservaRepository;
 import com.example.proyecte_esgrima.repository.UsuariRepository;
 import com.example.proyecte_esgrima.services.ReservaService;
@@ -15,31 +15,30 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ReservaServiceImpl implements ReservaService {
 
     private final ReservaRepository reservaRepository;
     private final UsuariRepository usuariRepository;
-    private final PistaRepository pistaRepository;
+    private final PistaCombateRepository pistaRepository;
 
     public ReservaServiceImpl(ReservaRepository reservaRepository,
                                UsuariRepository usuariRepository,
-                               PistaRepository pistaRepository) {
+                               PistaCombateRepository pistaRepository) {
         this.reservaRepository = reservaRepository;
         this.usuariRepository  = usuariRepository;
         this.pistaRepository   = pistaRepository;
     }
 
     @Override
-    public Reserva crearReserva(String esgrimista1Id, ReservaRequest request) {
+    public Reserva crearReserva(String esgrimista1Id, ReservaRequest request) throws Exception {
         // Validar esgrimista 1
         usuariRepository.findById(esgrimista1Id)
                 .orElseThrow(() -> new Exception("Esgrimista"));
 
         // Validar pista
-        Pista pista = pistaRepository.findById(request.getPistaId())
+        PistaCombate pista = pistaRepository.findById(request.getPistaId())
                 .orElseThrow(() -> new Exception("Pista de combat"));
 
         // Validar rang horari
@@ -115,7 +114,7 @@ public class ReservaServiceImpl implements ReservaService {
     public Reserva getById(String id) throws Exception {
         Reserva reserva = reservaRepository.findById(id)
                 .orElseThrow(() -> new Exception("Reserva"));
-        Pista pista = pistaRepository.findById(reserva.getPistaId()).orElse(null);
+        PistaCombate pista = pistaRepository.findById(reserva.getPistaId()).orElse(null);
         return reserva;
     }
 
@@ -152,7 +151,7 @@ public class ReservaServiceImpl implements ReservaService {
         }
         reserva.setEstat(EstadoReserva.CANCELLED);
         reservaRepository.save(reserva);
-        Pista pista = pistaRepository.findById(reserva.getPistaId()).orElse(null);
+        PistaCombate pista = pistaRepository.findById(reserva.getPistaId()).orElse(null);
         return reserva;
     }
 

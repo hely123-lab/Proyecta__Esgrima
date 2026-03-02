@@ -3,6 +3,7 @@ package com.example.proyecte_esgrima.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.example.proyecte_esgrima.model.enums.ArmaEsgrima;
 import com.example.proyecte_esgrima.model.enums.EstadoReserva;
 
 import java.time.LocalDate;
@@ -31,6 +32,8 @@ public class Reserva {
     private EstadoReserva estat;
     
     public boolean buscarRivalAutomatic;
+    
+    private ArmaEsgrima tipusArma;
 
 
     public Reserva() {
@@ -107,6 +110,15 @@ public class Reserva {
 	public void setDataHoraFi(LocalDateTime dataHoraFi) {
 		this.dataHoraFi = dataHoraFi;
 	}
+
+	public ArmaEsgrima getTipusArma() {
+		return tipusArma;
+	}
+
+	public void setTipusArma(ArmaEsgrima tipusArma) {
+		this.tipusArma = tipusArma;
+	}
+	
 	
 	
   

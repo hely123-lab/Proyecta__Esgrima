@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.example.proyecte_esgrima.model.Reserva;
+import com.example.proyecte_esgrima.model.enums.ArmaEsgrima;
 import com.example.proyecte_esgrima.model.enums.EstadoReserva;
 
 public interface ReservaRepository extends MongoRepository<Reserva, String> {
