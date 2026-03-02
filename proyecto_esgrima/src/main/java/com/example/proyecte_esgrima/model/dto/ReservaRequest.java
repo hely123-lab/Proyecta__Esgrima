@@ -2,6 +2,8 @@ package com.example.proyecte_esgrima.model.dto;
 
 import java.time.LocalDateTime;
 
+import com.example.proyecte_esgrima.model.enums.ArmaEsgrima;
+
 import jakarta.validation.constraints.NotNull;
 
 public class ReservaRequest {
@@ -18,6 +20,8 @@ public class ReservaRequest {
     private LocalDateTime dataHoraFi;
 
     private boolean buscarRivalAutomatic = false;
+    
+    private ArmaEsgrima tipusArma;
 
     public ReservaRequest() {}
     
@@ -62,6 +66,16 @@ public class ReservaRequest {
 	public void setBuscarRivalAutomatic(boolean buscarRivalAutomatic) {
 		this.buscarRivalAutomatic = buscarRivalAutomatic;
 	}
+
+	public ArmaEsgrima getTipusArma() {
+		return tipusArma;
+	}
+
+	public void setTipusArma(ArmaEsgrima tipusArma) {
+		this.tipusArma = tipusArma;
+	}
+	
+	
     
   
 }

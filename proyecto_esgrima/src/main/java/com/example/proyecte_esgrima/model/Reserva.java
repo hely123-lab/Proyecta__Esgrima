@@ -3,7 +3,11 @@ package com.example.proyecte_esgrima.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.example.proyecte_esgrima.model.enums.ArmaEsgrima;
+import com.example.proyecte_esgrima.model.enums.EstadoReserva;
+
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -13,67 +17,109 @@ public class Reserva {
     @Id
     private String id;
 
-    private LocalDate data;
-    private LocalTime hora;
+    private LocalDateTime data;
+    
+    private LocalDateTime dataHoraInici;
+    private LocalDateTime dataHoraFi;
 
     // ID referencia de la pista
     private String pistaId;     
     // IDs de usuarios
-    private List<String> usuarisIds; 
+    private String esgrimista1Id;
+    private String esgrimista2Id;
 
     // Completada, Cancelada
-    private String estat;
-    public Reserva() {}
+    private EstadoReserva estat;
+    
+    public boolean buscarRivalAutomatic;
+    
+    private ArmaEsgrima tipusArma;
 
-    public Reserva(LocalDate data, LocalTime hora,
-                   String pistaId, List<String> usuarisIds, String estat) {
-        this.setData(data);
-        this.setHora(hora);
-        this.setPistaId(pistaId);
-        this.setUsuarisIds(usuarisIds);
-        this.setEstat(estat);
+
+    public Reserva() {
+        this.data = LocalDateTime.now();
+        this.estat = EstadoReserva.PENDING;
     }
     
     // Getters i Setters
 
-	public LocalDate getData() {
-		return data;
-	}
+    
 
-	public void setData(LocalDate data) {
-		this.data = data;
-	}
-
-	public LocalTime getHora() {
-		return hora;
-	}
-
-	public void setHora(LocalTime hora) {
-		this.hora = hora;
-	}
 
 	public String getPistaId() {
 		return pistaId;
+	}
+
+	public boolean isBuscarRivalAutomatic() {
+		return buscarRivalAutomatic;
+	}
+
+	public void setBuscarRivalAutomatic(boolean buscarRivalAutomatic) {
+		this.buscarRivalAutomatic = buscarRivalAutomatic;
+	}
+
+	public LocalDateTime getData() {
+		return data;
+	}
+
+	public void setData(LocalDateTime data) {
+		this.data = data;
 	}
 
 	public void setPistaId(String pistaId) {
 		this.pistaId = pistaId;
 	}
 
-	public List<String> getUsuarisIds() {
-		return usuarisIds;
+	
+	public String getEsgrimista1Id() {
+		return esgrimista1Id;
 	}
 
-	public void setUsuarisIds(List<String> usuarisIds) {
-		this.usuarisIds = usuarisIds;
+	public void setEsgrimista1Id(String esgrimista1Id) {
+		this.esgrimista1Id = esgrimista1Id;
 	}
 
-	public String getEstat() {
+	public String getEsgrimista2Id() {
+		return esgrimista2Id;
+	}
+
+	public void setEsgrimista2Id(String esgrimista2Id) {
+		this.esgrimista2Id = esgrimista2Id;
+	}
+
+	public EstadoReserva getEstat() {
 		return estat;
 	}
 
-	public void setEstat(String estat) {
+	public void setEstat(EstadoReserva estat) {
 		this.estat = estat;
 	}
+
+	public LocalDateTime getDataHoraInici() {
+		return dataHoraInici;
+	}
+
+	public void setDataHoraInici(LocalDateTime dataHoraInici) {
+		this.dataHoraInici = dataHoraInici;
+	}
+
+	public LocalDateTime getDataHoraFi() {
+		return dataHoraFi;
+	}
+
+	public void setDataHoraFi(LocalDateTime dataHoraFi) {
+		this.dataHoraFi = dataHoraFi;
+	}
+
+	public ArmaEsgrima getTipusArma() {
+		return tipusArma;
+	}
+
+	public void setTipusArma(ArmaEsgrima tipusArma) {
+		this.tipusArma = tipusArma;
+	}
+	
+	
+	
   
 }
