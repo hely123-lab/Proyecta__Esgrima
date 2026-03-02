@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * Document que representa la pista.
  */
 @Document(collection = "pistes")
-public class Pista {
+public class PistaCombate {
 
 	/*
 	 * Id unica del document en MongoDB
@@ -16,7 +16,7 @@ public class Pista {
 	private String id;
 
 	/*
-	 * Nombre de la Pista ej: Pista A, Pista B etc..
+	 * Nombre de la PistaCombate ej: PistaCombate A, PistaCombate B etc..
 	 */
 	private String nom;
 
@@ -28,13 +28,13 @@ public class Pista {
 	/*
 	 * Constructor vacio
 	 */
-	public Pista() {
+	public PistaCombate() {
 	}
 
 	/*
 	 * Constructor con parametros.
 	 */
-	public Pista(String nom, String tipusEsport) {
+	public PistaCombate(String nom, String tipusEsport) {
 		this.setNom(nom);
 		this.setTipusEsport(tipusEsport);
 	}
