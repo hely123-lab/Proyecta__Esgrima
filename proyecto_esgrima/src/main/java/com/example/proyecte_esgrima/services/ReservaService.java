@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface ReservaService {
     Reserva crearReserva(String esgrimista1Id, ReservaRequest request);
-    Reserva getById(String id);
+    Reserva getById(String id) throws Exception;
     List<Reserva> getHistorialByUsuari(String usuariId);
     List<Reserva> getAll();
     List<Reserva> getDisponibilitatPista(String pistaId, LocalDateTime inici, LocalDateTime fi);
-    Reserva cancellarReserva(String id, String usuariId);
+    Reserva cancellarReserva(String id, String usuariId) throws Exception;
 }
