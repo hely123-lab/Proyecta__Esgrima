@@ -6,11 +6,14 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * Registra el resultat d'un combat. Vinculat a una Reserva.
+ *Registra el resultado de un combate. Vinculado con una Reserva.
  */
 @Document(collection = "resultats_combat")
 public class ResultatCombat {
 
+	/*
+	 * */
+	
 	@Id
 	private String id;
 
