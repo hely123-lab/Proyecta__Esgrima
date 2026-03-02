@@ -15,8 +15,9 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Document que representa l'usuari de l'aplicació implementa userDetails per el
- * login amb security
+ * Documento que representa el usuario, que implementa userDetails para ell
+ * login con security.
+ * 
  */
 @Document(collection = "usuaris")
 public class Usuari implements UserDetails {
