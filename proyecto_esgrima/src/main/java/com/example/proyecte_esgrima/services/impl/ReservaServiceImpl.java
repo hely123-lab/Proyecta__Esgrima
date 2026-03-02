@@ -1,7 +1,7 @@
 package com.example.proyecte_esgrima.services.impl;
 
 
-import com.example.proyecte_esgrima.model.Pista;
+import com.example.proyecte_esgrima.model.PistaCombate;
 import com.example.proyecte_esgrima.model.Reserva;
 import com.example.proyecte_esgrima.model.dto.ReservaRequest;
 import com.example.proyecte_esgrima.model.enums.EstadoReserva;
