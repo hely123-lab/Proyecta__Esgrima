@@ -34,7 +34,7 @@ public class UsuariServiceImpl implements UsuariService {
     }
 
     @Override
-    public void register(RegisterRequest request) throws Exception {
+    public AuthResponse register(RegisterRequest request) throws Exception {
         if (usuariRepository.existsByEmail(request.getEmail())) {
             throw new Exception(
                     "Ja existeix un usuari amb l'email: " + request.getEmail());
@@ -50,11 +50,14 @@ public class UsuariServiceImpl implements UsuariService {
                 Role.ROLE_USER
         );
         usuariRepository.save(usuari);
+        AuthResponse responseCreated = new AuthResponse();
+        responseCreated.setEmail(usuari.getEmail());
+        return responseCreated;
    
     }
 
     @Override
-    public String login(LoginRequest request) throws Exception {
+    public AuthResponse login(LoginRequest request) throws Exception {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
         );
@@ -62,8 +65,9 @@ public class UsuariServiceImpl implements UsuariService {
         	throw new Exception("El usuari amb email " + request.getEmail() + " no existeix");
         }
         Optional<Usuari> usuari = usuariRepository.findByEmail(request.getEmail());
+        if(usuari.get() == null) throw new Exception("Usuari no trobat");
         String token = jwtUtil.generateToken(usuari.get());
-        return token;
+        return new AuthResponse(token, usuari.get().getEmail(), usuari.get().getRol().name(), usuari.get().getNom());
     }
 
     @Override
