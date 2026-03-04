@@ -14,7 +14,7 @@ public interface PistaCombateRepository extends MongoRepository<PistaCombate, St
 	Optional<PistaCombate> findByNom(String nom);
 
 	boolean existsByNom(String nom);
-
+	
 	List<PistaCombate> findByDisponible(boolean disponible);
 
 	List<PistaCombate> findByTipusArma(ArmaEsgrima tipusArma);
