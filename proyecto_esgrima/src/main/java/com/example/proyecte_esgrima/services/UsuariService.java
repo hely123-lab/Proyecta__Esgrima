@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.proyecte_esgrima.model.Usuari;
 import com.example.proyecte_esgrima.model.dto.LoginRequest;
 import com.example.proyecte_esgrima.model.dto.RegisterRequest;
+import com.example.proyecte_esgrima.model.dto.UpdateUsuariRequest;
 import com.example.proyecte_esgrima.model.enums.Role;
 
 public interface UsuariService {
@@ -19,9 +20,9 @@ public interface UsuariService {
 
 	List<Usuari> getAllUsuaris();
 
-	Usuari updatePerfil(String id, Usuari request) throws Exception;
-
 	Usuari updateRol(String id, Role rol) throws Exception;
 
 	void deleteUsuari(String id) throws Exception;
+
+	Usuari updatePerfil(String id, UpdateUsuariRequest request) throws Exception;
 }

@@ -85,7 +85,7 @@ public class UsuariServiceImpl implements UsuariService {
     }
 
     @Override
-    public Usuari updatePerfil(String id, Usuari request) throws Exception {
+    public Usuari updatePerfil(String id, UpdateUsuariRequest request) throws Exception {
         Usuari usuari = usuariRepository.findById(id)
                 .orElseThrow(() -> new Exception("Usuari amb id " +  id + " no trobat"));
         usuari.setNom(request.getNom());
