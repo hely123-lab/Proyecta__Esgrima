@@ -2,6 +2,7 @@ package com.example.proyecte_esgrima.controller;
 
 
 import com.example.proyecte_esgrima.model.Usuari;
+import com.example.proyecte_esgrima.model.dto.UpdateUsuariRequest;
 import com.example.proyecte_esgrima.model.enums.Role;
 import com.example.proyecte_esgrima.services.UsuariService;
 
@@ -56,7 +57,7 @@ public class UsuariController {
     @Operation(summary = "Modificar perfil")
     public ResponseEntity<Usuari> updatePerfil(
             @PathVariable String id,
-            @Valid @RequestBody Usuari request) throws Exception {
+            @Valid @RequestBody UpdateUsuariRequest request) throws Exception {
         return ResponseEntity.ok(usuariService.updatePerfil(id, request));
     }
 
