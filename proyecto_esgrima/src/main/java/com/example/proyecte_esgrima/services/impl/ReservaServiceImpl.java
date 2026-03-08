@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.example.proyecte_esgrima.exception.RecursNotFoundException;
+import com.example.proyecte_esgrima.exception.ReglaNegociException;
 import com.example.proyecte_esgrima.model.PistaCombate;
 import com.example.proyecte_esgrima.model.Reserva;
 import com.example.proyecte_esgrima.model.dto.ReservaRequest;
@@ -31,17 +33,17 @@ public class ReservaServiceImpl implements ReservaService {
 	}
 
 	@Override
-	public Reserva crearReserva(String esgrimista1Id, ReservaRequest request) throws Exception {
+	public Reserva crearReserva(String esgrimista1Id, ReservaRequest request){
 		// Validar esgrimista 1
-		usuariRepository.findById(esgrimista1Id).orElseThrow(() -> new Exception("Esgrimista"));
+		usuariRepository.findById(esgrimista1Id).orElseThrow(() -> new RecursNotFoundException("Esgrimista", esgrimista1Id));
 
 		// Validar pista
 		PistaCombate pista = pistaRepository.findById(request.getPistaId())
-				.orElseThrow(() -> new Exception("Pista de combat"));
+				.orElseThrow(() -> new RecursNotFoundException("Pista de combat", request.getPistaId()));
 
 		// Validar rang horari
 		if (!request.getDataHoraFi().isAfter(request.getDataHoraInici())) {
-			throw new Exception("La data/hora de fi ha de ser posterior a la d'inici");
+			throw new ReglaNegociException("La data/hora de fi ha de ser posterior a la d'inici");
 		}
 
 		// Validar disponibilitat de la pista (sense solapaments)
@@ -49,7 +51,7 @@ public class ReservaServiceImpl implements ReservaService {
 				.findByPistaIdAndEstatNotAndDataHoraIniciLessThanAndDataHoraFiGreaterThan(request.getPistaId(),
 						EstadoReserva.CANCELLED, request.getDataHoraFi(), request.getDataHoraInici());
 		if (solapament.isPresent()) {
-			throw new Exception("La pista ja està reservada en el rang horari indicat");
+			throw new ReglaNegociException("La pista ja està reservada en el rang horari indicat");
 		}
 
 		Reserva reserva = new Reserva();
@@ -64,12 +66,12 @@ public class ReservaServiceImpl implements ReservaService {
 			assignarRivalAutomatic(reserva, esgrimista1Id, request);
 		} else {
 			if (request.getEsgrimista2Id() == null || request.getEsgrimista2Id().isBlank()) {
-				throw new Exception("Cal indicar l'ID del segon esgrimista o activar la cerca automàtica de rival");
+				throw new ReglaNegociException("Cal indicar l'ID del segon esgrimista o activar la cerca automàtica de rival");
 			}
 			if (request.getEsgrimista2Id().equals(esgrimista1Id)) {
-				throw new Exception("Els dos esgrimistes han de ser persones diferents");
+				throw new ReglaNegociException("Els dos esgrimistes han de ser persones diferents");
 			}
-			usuariRepository.findById(request.getEsgrimista2Id()).orElseThrow(() -> new Exception("Esgrimista 2"));
+			usuariRepository.findById(request.getEsgrimista2Id()).orElseThrow(() -> new RecursNotFoundException("Esgrimista 2", request.getEsgrimista2Id()));
 			reserva.setEsgrimista2Id(request.getEsgrimista2Id());
 			reserva.setEstat(EstadoReserva.CONFIRMED);
 		}
@@ -99,8 +101,8 @@ public class ReservaServiceImpl implements ReservaService {
 	}
 
 	@Override
-	public Reserva getById(String id) throws Exception {
-		Reserva reserva = reservaRepository.findById(id).orElseThrow(() -> new Exception("Reserva"));
+	public Reserva getById(String id) {
+		Reserva reserva = reservaRepository.findById(id).orElseThrow(() -> new RecursNotFoundException("Reserva", id));
 		PistaCombate pista = pistaRepository.findById(reserva.getPistaId()).orElse(null);
 		return reserva;
 	}
@@ -123,16 +125,16 @@ public class ReservaServiceImpl implements ReservaService {
 	}
 
 	@Override
-	public Reserva cancellarReserva(String id, String usuariId) throws Exception {
-		Reserva reserva = reservaRepository.findById(id).orElseThrow(() -> new Exception("Reserva"));
+	public Reserva cancellarReserva(String id, String usuariId) {
+		Reserva reserva = reservaRepository.findById(id).orElseThrow(() -> new RecursNotFoundException("Reserva", id));
 		if (!reserva.getEsgrimista1Id().equals(usuariId)) {
-			throw new Exception("Només el creador de la reserva pot cancel·lar-la");
+			throw new ReglaNegociException("Només el creador de la reserva pot cancel·lar-la");
 		}
 		if (reserva.getEstat() == EstadoReserva.COMPLETED) {
-			throw new Exception("No es pot cancel·lar una reserva ja completada");
+			throw new ReglaNegociException("No es pot cancel·lar una reserva ja completada");
 		}
 		if (reserva.getEstat() == EstadoReserva.CANCELLED) {
-			throw new Exception("Aquesta reserva ja estava cancel·lada");
+			throw new ReglaNegociException("Aquesta reserva ja estava cancel·lada");
 		}
 		reserva.setEstat(EstadoReserva.CANCELLED);
 		reservaRepository.save(reserva);

@@ -11,19 +11,19 @@ import com.example.proyecte_esgrima.model.enums.Role;
 
 public interface UsuariService {
 
-	AuthResponse register(RegisterRequest request) throws Exception;
+	AuthResponse register(RegisterRequest request);
 
-	AuthResponse login(LoginRequest request) throws Exception;
+	AuthResponse login(LoginRequest request) ;
 
-	Usuari getPerfilById(String id) throws Exception;
+	Usuari getPerfilById(String id) ;
 
-	Usuari getPerfilByEmail(String email) throws Exception;
+	Usuari getPerfilByEmail(String email);
 
 	List<Usuari> getAllUsuaris();
 
-	Usuari updateRol(String id, Role rol) throws Exception;
+	Usuari updateRol(String id, Role rol);
 
-	void deleteUsuari(String id) throws Exception;
+	void deleteUsuari(String id) ;
 
-	Usuari updatePerfil(String id, UpdateUsuariRequest request) throws Exception;
+	Usuari updatePerfil(String id, UpdateUsuariRequest request);
 }

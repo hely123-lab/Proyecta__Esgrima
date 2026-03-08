@@ -42,7 +42,7 @@ public class ReservaController {
                description = "Crea una reserva per a dos esgrimistes concrets o activa la cerca automàtica de rival.")
     public ResponseEntity<Reserva> crear(
             @AuthenticationPrincipal UserDetails userDetails,
-            @Valid @RequestBody ReservaRequest request) throws Exception {
+            @Valid @RequestBody ReservaRequest request) {
         String usuariId = usuariService.getPerfilByEmail(userDetails.getUsername()).getId();
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(reservaService.crearReserva(usuariId, request));
@@ -50,7 +50,7 @@ public class ReservaController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Obtenir una reserva per ID")
-    public ResponseEntity<Reserva> getById(@PathVariable String id) throws Exception {
+    public ResponseEntity<Reserva> getById(@PathVariable String id) {
         return ResponseEntity.ok(reservaService.getById(id));
     }
 
@@ -58,7 +58,7 @@ public class ReservaController {
     @Operation(summary = "Historial de les meves reserves",
                description = "Retorna totes les reserves de l'usuari autenticat.")
     public ResponseEntity<List<Reserva>> getMevesReserves(
-            @AuthenticationPrincipal UserDetails userDetails) throws Exception {
+            @AuthenticationPrincipal UserDetails userDetails) {
         String usuariId = usuariService.getPerfilByEmail(userDetails.getUsername()).getId();
         return ResponseEntity.ok(reservaService.getHistorialByUsuari(usuariId));
     }
@@ -85,7 +85,7 @@ public class ReservaController {
                description = "Només el creador o un admin pot cancel·lar la reserva.")
     public ResponseEntity<Reserva> cancellar(
             @PathVariable String id,
-            @AuthenticationPrincipal UserDetails userDetails) throws Exception {
+            @AuthenticationPrincipal UserDetails userDetails) {
         String usuariId = usuariService.getPerfilByEmail(userDetails.getUsername()).getId();
         return ResponseEntity.ok(reservaService.cancellarReserva(id, usuariId));
     }

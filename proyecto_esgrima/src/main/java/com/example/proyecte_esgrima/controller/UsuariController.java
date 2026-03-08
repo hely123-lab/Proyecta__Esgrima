@@ -36,13 +36,13 @@ public class UsuariController {
     @GetMapping("/me")
     @Operation(summary = "Obtenir el meu perfil")
     public ResponseEntity<Usuari> getMyPerfil(
-            @AuthenticationPrincipal UserDetails userDetails) throws Exception {
+            @AuthenticationPrincipal UserDetails userDetails) {
         return ResponseEntity.ok(usuariService.getPerfilByEmail(userDetails.getUsername()));
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Obtenir perfil per ID")
-    public ResponseEntity<Usuari> getById(@PathVariable String id) throws Exception {
+    public ResponseEntity<Usuari> getById(@PathVariable String id)  {
         return ResponseEntity.ok(usuariService.getPerfilById(id));
     }
 
@@ -57,7 +57,7 @@ public class UsuariController {
     @Operation(summary = "Modificar perfil")
     public ResponseEntity<Usuari> updatePerfil(
             @PathVariable String id,
-            @Valid @RequestBody UpdateUsuariRequest request) throws Exception {
+            @Valid @RequestBody UpdateUsuariRequest request)  {
         return ResponseEntity.ok(usuariService.updatePerfil(id, request));
     }
 
@@ -66,7 +66,7 @@ public class UsuariController {
     @Operation(summary = "Canviar rol d'un usuari (ADMIN)")
     public ResponseEntity<Usuari> updateRol(
             @PathVariable String id,
-            @RequestParam Role rol) throws Exception {
+            @RequestParam Role rol)  {
         return ResponseEntity.ok(usuariService.updateRol(id, rol));
     }
 

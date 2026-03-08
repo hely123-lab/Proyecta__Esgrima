@@ -30,14 +30,14 @@ public class AuthController {
     @PostMapping("/register")
     @Operation(summary = "Registre d'un nou esgrimista",
                description = "Crea un nou compte. Retorna un JWT vàlid.")
-    public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) throws Exception {
+    public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(usuariService.register(request));
     }
 
     @PostMapping("/login")
     @Operation(summary = "Login d'un esgrimista",
                description = "Autentica l'usuari amb email i contrasenya. Retorna un JWT vàlid.")
-    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) throws Exception {
+    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
         return ResponseEntity.ok(usuariService.login(request));
     }
 }

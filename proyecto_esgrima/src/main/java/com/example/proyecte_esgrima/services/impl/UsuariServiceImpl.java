@@ -1,6 +1,7 @@
 package com.example.proyecte_esgrima.services.impl;
 
 
+import com.example.proyecte_esgrima.exception.RecursNotFoundException;
 import com.example.proyecte_esgrima.model.Usuari;
 import com.example.proyecte_esgrima.model.dto.*;
 import com.example.proyecte_esgrima.model.enums.Role;
@@ -34,10 +35,10 @@ public class UsuariServiceImpl implements UsuariService {
     }
 
     @Override
-    public AuthResponse register(RegisterRequest request) throws Exception {
+    public AuthResponse register(RegisterRequest request) {
         if (usuariRepository.existsByEmail(request.getEmail())) {
-            throw new Exception(
-                    "Ja existeix un usuari amb l'email: " + request.getEmail());
+            throw new RecursNotFoundException(
+                    "Usuari" , request.getEmail());
         }
         Usuari usuari = new Usuari(
                 request.getNom(),
@@ -57,30 +58,29 @@ public class UsuariServiceImpl implements UsuariService {
     }
 
     @Override
-    public AuthResponse login(LoginRequest request) throws Exception {
+    public AuthResponse login(LoginRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
         );
         if(!usuariRepository.existsByEmail(request.getEmail())) {
-        	throw new Exception("El usuari amb email " + request.getEmail() + " no existeix");
+        	throw new RecursNotFoundException("Usuari", request.getEmail());
         }
         Optional<Usuari> usuari = usuariRepository.findByEmail(request.getEmail());
-        if(usuari.get() == null) throw new Exception("Usuari no trobat");
         String token = jwtUtil.generateToken(usuari.get());
         return new AuthResponse(token, usuari.get().getEmail(), usuari.get().getRol().name(), usuari.get().getNom());
     }
 
     @Override
-    public Usuari getPerfilById(String id) throws Exception {
+    public Usuari getPerfilById(String id) {
         return (usuariRepository.findById(id)
-                .orElseThrow(() -> new Exception("Usuari amb id " + id + "no trobat")));
+                .orElseThrow(() -> new RecursNotFoundException("usuari", id)));
     }
 
     @Override
-    public Usuari getPerfilByEmail(String email) throws Exception {
+    public Usuari getPerfilByEmail(String email) {
         return (usuariRepository.findByEmail(email)
-                .orElseThrow(() -> new Exception(
-                        "Usuari no trobat amb email: " + email)));
+                .orElseThrow(() -> new RecursNotFoundException(
+                        "Usuari", email)));
     }
 
     @Override
@@ -89,9 +89,9 @@ public class UsuariServiceImpl implements UsuariService {
     }
 
     @Override
-    public Usuari updatePerfil(String id, UpdateUsuariRequest request) throws Exception {
+    public Usuari updatePerfil(String id, UpdateUsuariRequest request) {
         Usuari usuari = usuariRepository.findById(id)
-                .orElseThrow(() -> new Exception("Usuari amb id " +  id + " no trobat"));
+                .orElseThrow(() -> new RecursNotFoundException("Usuari", id));
         usuari.setNom(request.getNom());
         usuari.setCognoms(request.getCognoms());
         usuari.setDataNaixement(request.getDataNaixement());
@@ -101,17 +101,17 @@ public class UsuariServiceImpl implements UsuariService {
     }
 
     @Override
-    public Usuari updateRol(String id, Role rol) throws Exception {
+    public Usuari updateRol(String id, Role rol) {
         Usuari usuari = usuariRepository.findById(id)
-                .orElseThrow(() -> new Exception("Usuari amb id " + id + " no trobat"));
+                .orElseThrow(() -> new RecursNotFoundException("Usuari", id ));
         usuari.setRol(rol);
         return (usuariRepository.save(usuari));
     }
 
     @Override
-    public void deleteUsuari(String id) throws Exception {
+    public void deleteUsuari(String id) {
         if (!usuariRepository.existsById(id)) {
-            throw new Exception("Usuari amb id " + id + " no trobat");
+            throw new RecursNotFoundException("Usuari", id );
         }
         usuariRepository.deleteById(id);
     }
