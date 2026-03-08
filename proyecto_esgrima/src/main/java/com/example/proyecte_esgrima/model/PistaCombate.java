@@ -3,6 +3,8 @@ package com.example.proyecte_esgrima.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.example.proyecte_esgrima.model.enums.ArmaEsgrima;
+
 /**
  * Document que representa la pista.
  */
@@ -26,6 +28,21 @@ public class PistaCombate {
 	private String tipusEsport;
 
 	/*
+	 * Descripció adicional de la pista.
+	 */
+	private String descripcio;
+
+	/*
+	 * Tipos de armas para la pista (ESPADA, FLORETE o SABLE).
+	 */
+	private ArmaEsgrima tipusArma;
+
+	/*
+	 * Indica si la pista està disponible para ser reservada.
+	 */
+	private boolean disponible = true;
+
+	/*
 	 * Constructor vacio
 	 */
 	public PistaCombate() {
@@ -34,14 +51,24 @@ public class PistaCombate {
 	/*
 	 * Constructor con parametros.
 	 */
-	public PistaCombate(String nom, String tipusEsport) {
-		this.setNom(nom);
-		this.setTipusEsport(tipusEsport);
+	public PistaCombate(String nom, String descripcio, ArmaEsgrima tipusArma) {
+		this.nom = nom;
+		this.descripcio = descripcio;
+		this.tipusArma = tipusArma;
+		this.disponible = true;
 	}
 
 	// Getters i Setters
 	public String getNom() {
 		return nom;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public void setNom(String nom) {
@@ -54,5 +81,29 @@ public class PistaCombate {
 
 	public void setTipusEsport(String tipusEsport) {
 		this.tipusEsport = tipusEsport;
+	}
+
+	public String getDescripcio() {
+		return descripcio;
+	}
+
+	public void setDescripcio(String descripcio) {
+		this.descripcio = descripcio;
+	}
+
+	public ArmaEsgrima getTipusArma() {
+		return tipusArma;
+	}
+
+	public void setTipusArma(ArmaEsgrima tipusArma) {
+		this.tipusArma = tipusArma;
+	}
+
+	public boolean isDisponible() {
+		return disponible;
+	}
+
+	public void setDisponible(boolean disponible) {
+		this.disponible = disponible;
 	}
 }
