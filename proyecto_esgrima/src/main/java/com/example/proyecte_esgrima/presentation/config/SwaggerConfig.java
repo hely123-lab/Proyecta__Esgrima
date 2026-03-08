@@ -1,4 +1,4 @@
-package com.exemple.proyecte_esgrima.presentation.config;
+package com.example.proyecte_esgrima.presentation.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
