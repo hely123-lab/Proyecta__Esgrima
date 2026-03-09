@@ -121,7 +121,7 @@ public class ReservaServiceImpl implements ReservaService {
 
 	@Override
 	public List<Reserva> getDisponibilitatPista(String pistaId, LocalDateTime inici, LocalDateTime fi) {
-		return reservaRepository.findByPistaIdAndDataHoraIniciiBetween(pistaId, inici, fi);
+		return reservaRepository.findByPistaIdAndDataHoraIniciBetween(pistaId, inici, fi);
 	}
 
 	@Override
