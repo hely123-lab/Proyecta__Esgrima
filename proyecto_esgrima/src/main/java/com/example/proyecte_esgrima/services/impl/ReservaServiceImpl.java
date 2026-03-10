@@ -48,7 +48,7 @@ public class ReservaServiceImpl implements ReservaService {
 
 		// Validar disponibilitat de la pista (sense solapaments)
 		Optional<Reserva> solapament = reservaRepository
-				.findByPistaIdAndEstatNotAndDataHoraIniciLessThanAndDataHoraFiGreaterThan(request.getPistaId(),
+				.findFirstByPistaIdAndEstatNotAndEsgrimista2IdNotNullAndDataHoraIniciLessThanAndDataHoraFiGreaterThan(request.getPistaId(),
 						EstadoReserva.CANCELLED, request.getDataHoraFi(), request.getDataHoraInici());
 		if (solapament.isPresent()) {
 			throw new ReglaNegociException("La pista ja està reservada en el rang horari indicat");

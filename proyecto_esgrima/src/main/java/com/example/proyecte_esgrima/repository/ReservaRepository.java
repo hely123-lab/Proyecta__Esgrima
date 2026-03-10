@@ -21,6 +21,6 @@ public interface ReservaRepository extends MongoRepository<Reserva, String> {
 	List<Reserva> findByEstatAndBuscarRivalAutomaticAndTipusArma(EstadoReserva estat, boolean buscarRivalAutomatic,
 			ArmaEsgrima tipusArma);
 
-	Optional<Reserva> findByPistaIdAndEstatNotAndDataHoraIniciLessThanAndDataHoraFiGreaterThan(String pistaId,
-			EstadoReserva estatExclos, LocalDateTime fiNova, LocalDateTime iniciNova);
+	Optional<Reserva> findFirstByPistaIdAndEstatNotAndEsgrimista2IdNotNullAndDataHoraIniciLessThanAndDataHoraFiGreaterThan(
+		    String pistaId, EstadoReserva estat, LocalDateTime fi, LocalDateTime inici);
 }
