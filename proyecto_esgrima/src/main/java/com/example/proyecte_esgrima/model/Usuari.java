@@ -94,9 +94,8 @@ public class Usuari implements UserDetails {
 	 * @return Llista de autoridades baasda en el rol
 	 */
 
-	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return List.of(new SimpleGrantedAuthority(rol.name()));
+	    return List.of(new SimpleGrantedAuthority("ROLE_" + rol.name()));
 	}
 
 	/*
