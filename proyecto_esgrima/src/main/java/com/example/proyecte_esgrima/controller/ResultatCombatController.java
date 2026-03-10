@@ -26,11 +26,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 /**
- * Controller para gestionar los resultados de combates y estadisticas con todos
- * los enspointd requeridos. Algunos endpoints estan restringidos con el rol
- * ADMIN.
+ * Controller para la gestión de resultados de combates y estadísticas. Todos
+ * los endpoints requieren un token JWT válido.
  *
- * Base URL: /api/resultats
+ * 
  */
 @RestController
 @RequestMapping("/api/resultats")
@@ -49,12 +48,13 @@ public class ResultatCombatController {
 	/**
 	 * POST /api/resultats
 	 *
-	 * Registra el resultado de un combate. solo accesible por ADMIN. la reserva
-	 * tiene que estar en CONFIRMED y cuando ya se registra el resultao se pasa a
-	 * COMPLETED.
+	 * Registra el resultado de un combate. Solo accesible por ADMIN. La reserva
+	 * vinculada debe estar en estado CONFIRMED. Una vez registrado el resultado, la
+	 * reserva pasa automáticamente a COMPLETED. Devuelve HTTP 201.
 	 *
-	 * @param request dades del resultat (reservaId, punts, duració)
-	 * @return el resultado creado con el codigo HTTP 201
+	 * @param request datos del resultado (reservaId, puntos de cada esgrimista,
+	 *                duración)
+	 * @return el resultado registrado con HTTP 201
 	 */
 	@PostMapping
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -70,7 +70,7 @@ public class ResultatCombatController {
 	 * Devuelve el resultado de un combate por su ID.
 	 *
 	 * @param id ID del resultado a buscar
-	 * @return el resultado encontrado con el codigo HTTP 200
+	 * @return el resultado con HTTP 200, o 404 si no existe
 	 */
 	@GetMapping("/{id}")
 	@Operation(summary = "Obtenir un resultat per ID")
@@ -81,11 +81,10 @@ public class ResultatCombatController {
 	/**
 	 * GET /api/resultats/meus
 	 *
-	 * Devuelve el historial de combates de un usuario.
+	 * Devuelve el historial de combates del usuario autenticado.
 	 *
-	 * @param userDetails datos del usuario autenticado, injectados por Spring
-	 *                    Security
-	 * @return Lista de resultado con el codigo HTTP 200
+	 * @param userDetails datos del usuario autenticado.
+	 * @return lista de resultados de combates con HTTP 200
 	 */
 	@GetMapping("/meus")
 	@Operation(summary = "Historial dels meus combats", description = "Retorna tots els resultats de combats de l'usuari autenticat.")
@@ -98,12 +97,11 @@ public class ResultatCombatController {
 	/**
 	 * GET /api/resultats/estadistiques/me
 	 *
-	 * Devuelve las estadisticas del usuario. total combates, victorias, derrotas y
-	 * porcentage de victorias.
+	 * Devuelve las estadísticas de combate del usuario autenticado: total de
+	 * combates, victorias, derrotas y porcentaje de victorias.
 	 *
-	 * @param userDetails datos del usuario autenticado, injectados por Spring
-	 *                    Security
-	 * @return estadisticas con el codigo HTTP 200
+	 * @param userDetails datos del usuario autenticado
+	 * @return EstadistiquesResponse con las estadísticas del usuario, HTTP 200
 	 */
 	@GetMapping("/estadistiques/me")
 	@Operation(summary = "Les meves estadístiques", description = "Retorna el total de combats, victòries, derrotes i % de victòries.")
@@ -116,11 +114,11 @@ public class ResultatCombatController {
 	/**
 	 * GET /api/resultats/estadistiques/{usuariId}
 	 *
-	 * Devuelve las estadisticas de un usuario concreto por su ID. solo accesible
-	 * por ADMIN, para consultar cualquier usuario.
+	 * Devuelve las estadísticas de un usuario concreto por su ID. Solo accesible
+	 * por ADMIN.
 	 * 
-	 * @param usuariId ID del usuario a cunsultar
-	 * @return estadisticas con el codigo HTTP 200
+	 * @param usuariId ID del usuario.
+	 * @return EstadistiquesResponse con las estadísticas del usuario, HTTP 200
 	 */
 	@GetMapping("/estadistiques/{usuariId}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")

@@ -4,9 +4,6 @@ import java.time.LocalDateTime;
 
 /**
  * DTO de salida con la informacion de un resultado de combate.
- *
- * Se utiliza como respuesta a los endpoints de ResultatCombatController.
- *
  */
 public class ResultatCombatResponse {
 

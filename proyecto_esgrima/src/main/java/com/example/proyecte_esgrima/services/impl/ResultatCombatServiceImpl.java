@@ -1,7 +1,7 @@
 package com.example.proyecte_esgrima.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -99,10 +99,12 @@ public class ResultatCombatServiceImpl implements ResultatCombatService {
 
 	@Override
 	public List<ResultatCombatResponse> getHistorialByUsuari(String usuariId) {
-		// Buscamos todos los combates donde el usuario ha participado como esgrimista 1
-		// o 2
-		return resultatRepository.findByEsgrimista1IdOrEsgrimista2Id(usuariId, usuariId).stream().map(this::toResponse)
-				.collect(Collectors.toList());
+		List<ResultatCombat> resultats = resultatRepository.findByEsgrimista1IdOrEsgrimista2Id(usuariId, usuariId);
+		List<ResultatCombatResponse> resultat = new ArrayList<>();
+		for (ResultatCombat r : resultats) {
+			resultat.add(toResponse(r));
+		}
+		return resultat;
 	}
 
 	@Override

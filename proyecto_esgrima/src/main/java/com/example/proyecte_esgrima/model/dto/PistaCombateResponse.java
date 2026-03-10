@@ -6,7 +6,6 @@ import com.example.proyecte_esgrima.model.enums.ArmaEsgrima;
  * Clase DTO utilizado para enviar al cliente la información de una Pista de
  * Combate.
  * 
- * Esta clase se utiliza en las respuestas HTTP del controlador,
  * 
  */
 public class PistaCombateResponse {

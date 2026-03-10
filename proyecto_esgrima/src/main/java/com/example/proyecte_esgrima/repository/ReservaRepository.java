@@ -10,6 +10,11 @@ import com.example.proyecte_esgrima.model.Reserva;
 import com.example.proyecte_esgrima.model.enums.ArmaEsgrima;
 import com.example.proyecte_esgrima.model.enums.EstadoReserva;
 
+/**
+ * Repositorio de la colección "reserves" en MongoDB.
+ *
+ * Hereda de MongoRepository para las operaciones básicas.
+ */
 public interface ReservaRepository extends MongoRepository<Reserva, String> {
 
 	List<Reserva> findByEsgrimista1Id(String esgrimista1Id);
@@ -22,5 +27,5 @@ public interface ReservaRepository extends MongoRepository<Reserva, String> {
 			ArmaEsgrima tipusArma);
 
 	Optional<Reserva> findFirstByPistaIdAndEstatNotAndEsgrimista2IdNotNullAndDataHoraIniciLessThanAndDataHoraFiGreaterThan(
-		    String pistaId, EstadoReserva estat, LocalDateTime fi, LocalDateTime inici);
+			String pistaId, EstadoReserva estat, LocalDateTime fi, LocalDateTime inici);
 }

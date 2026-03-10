@@ -8,7 +8,6 @@ import jakarta.validation.constraints.NotBlank;
  * Clase DTO utilizada para recibir los datos necesarios para crear o actualizar
  * una pista de combate.
  * 
- * Se utiliza en las peticiones HTTP (POST y PUT)
  * 
  */
 public class PistaCombateRequest {

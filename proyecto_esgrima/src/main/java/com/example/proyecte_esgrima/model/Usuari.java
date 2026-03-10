@@ -1,5 +1,9 @@
 package com.example.proyecte_esgrima.model;
 
+import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,10 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.proyecte_esgrima.model.enums.NivelEsgrimista;
 import com.example.proyecte_esgrima.model.enums.Role;
-
-import java.time.LocalDate;
-import java.util.Collection;
-import java.util.List;
 
 /**
  * Documento que representa el usuario, que implementa userDetails para ell

@@ -1,50 +1,43 @@
 package com.example.proyecte_esgrima.model;
 
+import java.time.LocalDateTime;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.example.proyecte_esgrima.model.enums.ArmaEsgrima;
 import com.example.proyecte_esgrima.model.enums.EstadoReserva;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.List;
-
 @Document(collection = "reserves")
 public class Reserva {
 
-    @Id
-    private String id;
+	@Id
+	private String id;
 
-    private LocalDateTime data;
-    
-    private LocalDateTime dataHoraInici;
-    private LocalDateTime dataHoraFi;
+	private LocalDateTime data;
 
-    // ID referencia de la pista
-    private String pistaId;     
-    // IDs de usuarios
-    private String esgrimista1Id;
-    private String esgrimista2Id;
+	private LocalDateTime dataHoraInici;
+	private LocalDateTime dataHoraFi;
 
-    // Completada, Cancelada
-    private EstadoReserva estat;
-    
-    public boolean buscarRivalAutomatic;
-    
-    private ArmaEsgrima tipusArma;
+	// ID referencia de la pista
+	private String pistaId;
+	// IDs de usuarios
+	private String esgrimista1Id;
+	private String esgrimista2Id;
 
+	// Completada, Cancelada
+	private EstadoReserva estat;
 
-    public Reserva() {
-        this.data = LocalDateTime.now();
-        this.estat = EstadoReserva.PENDING;
-    }
-    
-    // Getters i Setters
+	private boolean buscarRivalAutomatic;
 
-    
+	private ArmaEsgrima tipusArma;
 
+	public Reserva() {
+		this.data = LocalDateTime.now();
+		this.estat = EstadoReserva.PENDING;
+	}
+
+	// Getters i Setters
 
 	public String getPistaId() {
 		return pistaId;
@@ -70,7 +63,6 @@ public class Reserva {
 		this.pistaId = pistaId;
 	}
 
-	
 	public String getEsgrimista1Id() {
 		return esgrimista1Id;
 	}
@@ -118,8 +110,5 @@ public class Reserva {
 	public void setTipusArma(ArmaEsgrima tipusArma) {
 		this.tipusArma = tipusArma;
 	}
-	
-	
-	
-  
+
 }

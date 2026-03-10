@@ -22,14 +22,13 @@ public class SwaggerConfig {
 	@Bean
 	public OpenAPI customOpenAPI() {
 		return new OpenAPI()
+				// Información general que aparece en la cabecera de la página de Swagger
 				.info(new Info().title("API del projecte aplicació esgrima").version("1.0")
 						.description("Documentació de l'api feta pel projecte, de l'aplicació d'esgrima"))
-				// Definim l'esquema de seguretat JWT amb el nom "bearerAuth"
-				// Aquest nom ha de coincidir exactament amb el que usen els
-				// controllers a @SecurityRequirement(name = "bearerAuth")
+				// Definimos el esquema de seguridad con el nombre "bearerAuth".
 				.components(new Components().addSecuritySchemes("bearerAuth",
 						new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")
-								.description("Introdueix el token JWT obtingut al login o register")))
+								.description("Introdueix el token JWT obtingut al login")))
 				// La aplicamos globalmente a todos los endpoints
 				.addSecurityItem(new SecurityRequirement().addList("bearerAuth"));
 	}

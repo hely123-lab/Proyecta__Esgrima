@@ -7,11 +7,16 @@ import org.springframework.stereotype.Repository;
 
 import com.example.proyecte_esgrima.model.Usuari;
 
+/**
+ * Repositorio de la colección "usuaris" en MongoDB.
+ *
+ * Hereda de MongoRepository, que ya proporciona las operaciones básicas.
+ */
 @Repository
-public interface UsuariRepository extends MongoRepository<Usuari, String>{
-	
-	Optional<Usuari> findByEmail(String email);
-    boolean existsByEmail(String email);
+public interface UsuariRepository extends MongoRepository<Usuari, String> {
 
+	Optional<Usuari> findByEmail(String email);
+
+	boolean existsByEmail(String email);
 
 }

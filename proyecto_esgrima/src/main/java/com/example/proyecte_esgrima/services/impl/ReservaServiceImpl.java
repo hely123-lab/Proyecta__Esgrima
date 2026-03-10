@@ -33,9 +33,10 @@ public class ReservaServiceImpl implements ReservaService {
 	}
 
 	@Override
-	public Reserva crearReserva(String esgrimista1Id, ReservaRequest request){
+	public Reserva crearReserva(String esgrimista1Id, ReservaRequest request) {
 		// Validar esgrimista 1
-		usuariRepository.findById(esgrimista1Id).orElseThrow(() -> new RecursNotFoundException("Esgrimista", esgrimista1Id));
+		usuariRepository.findById(esgrimista1Id)
+				.orElseThrow(() -> new RecursNotFoundException("Esgrimista", esgrimista1Id));
 
 		// Validar pista
 		PistaCombate pista = pistaRepository.findById(request.getPistaId())
@@ -48,8 +49,9 @@ public class ReservaServiceImpl implements ReservaService {
 
 		// Validar disponibilitat de la pista (sense solapaments)
 		Optional<Reserva> solapament = reservaRepository
-				.findFirstByPistaIdAndEstatNotAndEsgrimista2IdNotNullAndDataHoraIniciLessThanAndDataHoraFiGreaterThan(request.getPistaId(),
-						EstadoReserva.CANCELLED, request.getDataHoraFi(), request.getDataHoraInici());
+				.findFirstByPistaIdAndEstatNotAndEsgrimista2IdNotNullAndDataHoraIniciLessThanAndDataHoraFiGreaterThan(
+						request.getPistaId(), EstadoReserva.CANCELLED, request.getDataHoraFi(),
+						request.getDataHoraInici());
 		if (solapament.isPresent()) {
 			throw new ReglaNegociException("La pista ja està reservada en el rang horari indicat");
 		}
@@ -66,12 +68,14 @@ public class ReservaServiceImpl implements ReservaService {
 			assignarRivalAutomatic(reserva, esgrimista1Id, request);
 		} else {
 			if (request.getEsgrimista2Id() == null || request.getEsgrimista2Id().isBlank()) {
-				throw new ReglaNegociException("Cal indicar l'ID del segon esgrimista o activar la cerca automàtica de rival");
+				throw new ReglaNegociException(
+						"Cal indicar l'ID del segon esgrimista o activar la cerca automàtica de rival");
 			}
 			if (request.getEsgrimista2Id().equals(esgrimista1Id)) {
 				throw new ReglaNegociException("Els dos esgrimistes han de ser persones diferents");
 			}
-			usuariRepository.findById(request.getEsgrimista2Id()).orElseThrow(() -> new RecursNotFoundException("Esgrimista 2", request.getEsgrimista2Id()));
+			usuariRepository.findById(request.getEsgrimista2Id())
+					.orElseThrow(() -> new RecursNotFoundException("Esgrimista 2", request.getEsgrimista2Id()));
 			reserva.setEsgrimista2Id(request.getEsgrimista2Id());
 			reserva.setEstat(EstadoReserva.CONFIRMED);
 		}
@@ -140,11 +144,5 @@ public class ReservaServiceImpl implements ReservaService {
 		reservaRepository.save(reserva);
 		PistaCombate pista = pistaRepository.findById(reserva.getPistaId()).orElse(null);
 		return reserva;
-	}
-
-	private String getNomUsuari(String id) {
-		if (id == null)
-			return null;
-		return usuariRepository.findById(id).map(u -> u.getNom() + " " + u.getCognoms()).orElse("Usuari desconegut");
 	}
 }

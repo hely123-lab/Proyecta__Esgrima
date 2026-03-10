@@ -4,11 +4,6 @@ package com.example.proyecte_esgrima.model.dto;
  * 
  * DTO de salida con las estadisticas basicas de un esgrimista.
  * 
- * Se utiliza los endpoints GET /api/resultats/estadistiques/me i GET
- * /api/resultats/estadistiques/{usuariId}.
- *
- * El porcentage de victorias se calcula automaticamente en el constructor para
- * evitar hacerlo manualmente despues.
  */
 public class EstadistiquesResponse {
 

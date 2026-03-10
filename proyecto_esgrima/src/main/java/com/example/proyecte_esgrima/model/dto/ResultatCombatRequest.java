@@ -8,7 +8,6 @@ import jakarta.validation.constraints.NotNull;
  * 
  * DTO de entrada para registrar el resultado de un combate.
  * 
- * Se utiliza el endpoint POST /api/resultats.
  */
 public class ResultatCombatRequest {
 

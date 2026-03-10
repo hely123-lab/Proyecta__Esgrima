@@ -1,7 +1,7 @@
 package com.example.proyecte_esgrima.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class PistaCombateServiceImpl implements PistaCombateService {
 
 	@Override
 	public PistaCombateResponse crear(PistaCombateRequest request) {
-		// Comprovem que no existeixi ja una pista amb el mateix nom
+		// Comprovamos que no exista una pista con el mismo nombre
 		if (pistaRepository.existsByNom(request.getNom())) {
 			throw new ReglaNegociException("Ja existeix una pista amb el nom: " + request.getNom());
 		}
@@ -48,12 +48,22 @@ public class PistaCombateServiceImpl implements PistaCombateService {
 
 	@Override
 	public List<PistaCombateResponse> getAll() {
-		return pistaRepository.findAll().stream().map(this::toResponse).collect(Collectors.toList());
+		List<PistaCombate> pistes = pistaRepository.findAll();
+		List<PistaCombateResponse> resultat = new ArrayList<>();
+		for (PistaCombate pista : pistes) {
+			resultat.add(toResponse(pista));
+		}
+		return resultat;
 	}
 
 	@Override
 	public List<PistaCombateResponse> getDisponibles() {
-		return pistaRepository.findByDisponible(true).stream().map(this::toResponse).collect(Collectors.toList());
+		List<PistaCombate> pistes = pistaRepository.findByDisponible(true);
+		List<PistaCombateResponse> resultat = new ArrayList<>();
+		for (PistaCombate pista : pistes) {
+			resultat.add(toResponse(pista));
+		}
+		return resultat;
 	}
 
 	@Override
