@@ -1,0 +1,49 @@
+<h4 class="mb-4"><i class="bi bi-journals me-2"></i>Els meus combats</h4>
+
+<div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+
+<div class="text-center py-5" *ngIf="loading">
+  <div class="spinner-border"></div>
+</div>
+
+<div *ngIf="!loading">
+  <div *ngIf="resultats.length === 0" class="text-center text-muted py-5">
+    <i class="bi bi-emoji-neutral fs-1"></i>
+    <p class="mt-2">Encara no has disputat cap combat.</p>
+  </div>
+
+  <div class="table-responsive" *ngIf="resultats.length > 0">
+    <table class="table table-hover align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>Data</th>
+          <th>Esgrimista 1</th>
+          <th>Punts 1</th>
+          <th>Esgrimista 2</th>
+          <th>Punts 2</th>
+          <th>Durada</th>
+          <th>Resultat</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of resultats">
+          <td>{{ r.dataCombat | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td class="small text-muted">{{ r.esgrimista1Id }}</td>
+          <td><strong>{{ r.puntsEsgrimista1 }}</strong></td>
+          <td class="small text-muted">{{ r.esgrimista2Id }}</td>
+          <td><strong>{{ r.puntsEsgrimista2 }}</strong></td>
+          <td>{{ r.duracioMinuts }} min</td>
+          <td>
+            <span class="badge bg-success" *ngIf="r.guanyadorId === r.esgrimista1Id && r.puntsEsgrimista1 >= r.puntsEsgrimista2">
+              <i class="bi bi-trophy-fill"></i> Victòria E1
+            </span>
+            <span class="badge bg-success" *ngIf="r.guanyadorId === r.esgrimista2Id && r.puntsEsgrimista2 > r.puntsEsgrimista1">
+              <i class="bi bi-trophy-fill"></i> Victòria E2
+            </span>
+            <span class="badge bg-secondary" *ngIf="!r.guanyadorId">Empat</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

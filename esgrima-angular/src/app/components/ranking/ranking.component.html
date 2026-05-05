@@ -1,0 +1,42 @@
+<h4 class="mb-4"><i class="bi bi-list-ol me-2"></i>Rànquing global</h4>
+
+<div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+
+<div class="text-center py-5" *ngIf="loading">
+  <div class="spinner-border"></div>
+</div>
+
+<div *ngIf="!loading">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th style="width:60px">#</th>
+          <th>Nom</th>
+          <th>Email</th>
+          <th>Nivell</th>
+          <th>Rol</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let u of usuaris; let i = index">
+          <td [ngClass]="medallaClass(i)">
+            <i class="bi bi-trophy-fill me-1" *ngIf="i === 0"></i>
+            <i class="bi bi-award-fill me-1" *ngIf="i === 1"></i>
+            <i class="bi bi-award me-1" *ngIf="i === 2"></i>
+            {{ i + 1 }}
+          </td>
+          <td>{{ u.nom }} {{ u.cognoms }}</td>
+          <td class="text-muted small">{{ u.email }}</td>
+          <td>
+            <span class="badge bg-secondary">{{ nivellLabel(u.nivell) }}</span>
+          </td>
+          <td>
+            <span class="badge bg-dark">{{ u.rol }}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="text-muted small">* El rànquing és de només lectura.</p>
+</div>

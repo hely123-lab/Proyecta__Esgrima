@@ -1,0 +1,78 @@
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card p-4">
+      <h4 class="mb-4"><i class="bi bi-person-circle me-2"></i>El meu perfil</h4>
+
+      <div class="alert alert-success" *ngIf="missatge">{{ missatge }}</div>
+      <div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+
+      <div *ngIf="usuari && !editant">
+        <dl class="row">
+          <dt class="col-sm-4">Nom</dt>
+          <dd class="col-sm-8">{{ usuari.nom }} {{ usuari.cognoms }}</dd>
+          <dt class="col-sm-4">Email</dt>
+          <dd class="col-sm-8">{{ usuari.email }}</dd>
+          <dt class="col-sm-4">Data naix.</dt>
+          <dd class="col-sm-8">{{ usuari.dataNaixement }}</dd>
+          <dt class="col-sm-4">Sexe</dt>
+          <dd class="col-sm-8">{{ usuari.sexe }}</dd>
+          <dt class="col-sm-4">Nivell</dt>
+          <dd class="col-sm-8"><span class="badge bg-secondary">{{ nivellLabel(usuari.nivell) }}</span></dd>
+          <dt class="col-sm-4">Rol</dt>
+          <dd class="col-sm-8"><span class="badge bg-dark">{{ usuari.rol }}</span></dd>
+        </dl>
+        <button class="btn btn-outline-dark" (click)="editant = true">
+          <i class="bi bi-pencil me-1"></i>Editar
+        </button>
+      </div>
+
+      <div *ngIf="usuari && editant">
+        <div class="row">
+          <div class="col mb-3">
+            <label class="form-label">Nom</label>
+            <input type="text" class="form-control" [(ngModel)]="form.nom">
+          </div>
+          <div class="col mb-3">
+            <label class="form-label">Cognoms</label>
+            <input type="text" class="form-control" [(ngModel)]="form.cognoms">
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Data de naixement</label>
+          <input type="date" class="form-control" [(ngModel)]="form.dataNaixement">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Sexe</label>
+          <select class="form-select" [(ngModel)]="form.sexe">
+            <option value="M">Masculí</option>
+            <option value="F">Femení</option>
+            <option value="Altre">Altre</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Nivell</label>
+          <select class="form-select" [(ngModel)]="form.nivell">
+            <option value="BASIC">Bàsic</option>
+            <option value="INTERMEDIATE">Intermedi</option>
+            <option value="ADVANCED">Avançat</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Arma preferida</label>
+          <select class="form-select" [(ngModel)]="form.armaPreferida">
+            <option value="ESPADA">Espada</option>
+            <option value="FLORETE">Florete</option>
+            <option value="SABLE">Sabre</option>
+          </select>
+        </div>
+        <div class="d-flex gap-2">
+          <button class="btn btn-dark" (click)="desar()" [disabled]="loading">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+            Desar
+          </button>
+          <button class="btn btn-outline-secondary" (click)="cancelar()">Cancel·lar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

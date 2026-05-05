@@ -1,0 +1,50 @@
+<h4 class="mb-4"><i class="bi bi-clock-history me-2"></i>Historial de reserves</h4>
+
+<div class="alert alert-success" *ngIf="missatgeCancelar">{{ missatgeCancelar }}</div>
+<div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+
+<div class="text-center py-5" *ngIf="loading">
+  <div class="spinner-border"></div>
+</div>
+
+<div *ngIf="!loading">
+  <div *ngIf="reserves.length === 0" class="text-center text-muted py-5">
+    <i class="bi bi-calendar-x fs-1"></i>
+    <p class="mt-2">No tens cap reserva encara.</p>
+    <a routerLink="/reserves" class="btn btn-dark">Crear primera reserva</a>
+  </div>
+
+  <div class="table-responsive" *ngIf="reserves.length > 0">
+    <table class="table table-hover align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>Pista</th>
+          <th>Inici</th>
+          <th>Fi</th>
+          <th>Arma</th>
+          <th>Estat</th>
+          <th>Acció</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of reserves">
+          <td>{{ r.pistaId }}</td>
+          <td>{{ r.dataHoraInici | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td>{{ r.dataHoraFi | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td>{{ r.tipusArma || '–' }}</td>
+          <td>
+            <span class="badge" [ngClass]="badgeClass(r.estat)">{{ r.estat }}</span>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-outline-danger"
+              *ngIf="esCancelable(r.estat)"
+              (click)="cancellar(r.id)">
+              <i class="bi bi-x-circle"></i> Cancel·lar
+            </button>
+            <span class="text-muted small" *ngIf="!esCancelable(r.estat)">–</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<h4 class="mb-4"><i class="bi bi-calendar-plus me-2"></i>Nova reserva</h4>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card p-4">
+
+      <div class="alert alert-success" *ngIf="missatge">{{ missatge }}</div>
+      <div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+
+      <div class="mb-3">
+        <label class="form-label">Pista de combat</label>
+        <select class="form-select" [(ngModel)]="form.pistaId">
+          <option value="">Selecciona una pista...</option>
+          <option *ngFor="let p of pistes" [value]="p.id">
+            {{ p.nom }} – {{ p.tipusArma }}
+          </option>
+        </select>
+      </div>
+
+      <div class="row">
+        <div class="col mb-3">
+          <label class="form-label">Inici</label>
+          <input type="datetime-local" class="form-control" [(ngModel)]="form.dataHoraInici">
+        </div>
+        <div class="col mb-3">
+          <label class="form-label">Fi</label>
+          <input type="datetime-local" class="form-control" [(ngModel)]="form.dataHoraFi">
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Arma (opcional)</label>
+        <select class="form-select" [(ngModel)]="form.tipusArma">
+          <option value="">Qualsevol</option>
+          <option value="ESPADA">Espada</option>
+          <option value="FLORETE">Florete</option>
+          <option value="SABLE">Sabre</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Rival (opcional)</label>
+        <select class="form-select" [(ngModel)]="form.esgrimista2Id" [disabled]="form.buscarRivalAutomatic">
+          <option value="">Sense rival assignat</option>
+          <option *ngFor="let u of usuaris" [value]="u.id">{{ u.nom }} {{ u.cognoms }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="autoRival" [(ngModel)]="form.buscarRivalAutomatic">
+        <label class="form-check-label" for="autoRival">
+          Cerca rival automàticament
+        </label>
+      </div>
+
+      <button class="btn btn-dark w-100" (click)="crearReserva()" [disabled]="loading || !form.pistaId || !form.dataHoraInici || !form.dataHoraFi">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+        <i class="bi bi-check-circle me-1"></i>Crear reserva
+      </button>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card p-4 h-100">
+      <h6 class="text-muted mb-3"><i class="bi bi-info-circle me-1"></i>Com funciona?</h6>
+      <ul class="list-unstyled small text-muted">
+        <li class="mb-2">✔ Selecciona una pista disponible</li>
+        <li class="mb-2">✔ Indica la data i hora d'inici i fi</li>
+        <li class="mb-2">✔ Pots triar un rival o activar la cerca automàtica</li>
+        <li class="mb-2">✔ La reserva quedarà en estat <strong>PENDING</strong> fins que es confirmi</li>
+        <li class="mb-2">✔ Consulta el teu historial a l'apartat <em>Historial</em></li>
+      </ul>
+    </div>
+  </div>
+</div>

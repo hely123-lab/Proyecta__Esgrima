@@ -1,0 +1,59 @@
+<h4 class="mb-4"><i class="bi bi-bar-chart-fill me-2"></i>Les meves estadístiques</h4>
+
+<div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+
+<div class="text-center py-5" *ngIf="loading">
+  <div class="spinner-border"></div>
+</div>
+
+<div *ngIf="!loading && stats">
+  <!-- Targetes resum -->
+  <div class="row g-3 mb-4">
+    <div class="col-6 col-md-3">
+      <div class="card text-center p-3">
+        <div class="fs-2 fw-bold text-primary">{{ stats.totalCombats }}</div>
+        <div class="text-muted small">Total combats</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="card text-center p-3">
+        <div class="fs-2 fw-bold text-success">{{ stats.victories }}</div>
+        <div class="text-muted small">Victòries</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="card text-center p-3">
+        <div class="fs-2 fw-bold text-danger">{{ stats.derrotes }}</div>
+        <div class="text-muted small">Derrotes</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="card text-center p-3">
+        <div class="fs-2 fw-bold text-warning">{{ stats.percentatgeVictories }}%</div>
+        <div class="text-muted small">% Victòries</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gràfics -->
+  <div class="row g-3">
+    <div class="col-md-4">
+      <div class="card p-3">
+        <h6 class="text-muted mb-3">Victòries / Derrotes</h6>
+        <canvas id="chartVD"></canvas>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card p-3">
+        <h6 class="text-muted mb-3">Combats per mes</h6>
+        <canvas id="chartMesos"></canvas>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card p-3">
+        <h6 class="text-muted mb-3">Evolució del rendiment</h6>
+        <canvas id="chartEvolucio"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
