@@ -40,8 +40,10 @@ public class UsuariServiceImpl implements UsuariService {
 				passwordEncoder.encode(request.getPassword()), request.getDataNaixement(), request.getSexe(),
 				request.getNivell(), Role.ROLE_USER);
 		usuariRepository.save(usuari);
+		String token = jwtUtil.generateToken(usuari);
 		AuthResponse responseCreated = new AuthResponse();
 		responseCreated.setEmail(usuari.getEmail());
+		responseCreated.setToken(token);
 		return responseCreated;
 
 	}

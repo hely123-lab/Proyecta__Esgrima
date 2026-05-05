@@ -74,8 +74,7 @@ public class UsuariController {
      * @return lista de todos los usuarios con HTTP 200
      */
     @GetMapping
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @Operation(summary = "Llistar tots els usuaris (ADMIN)")
+    @Operation(summary = "Llistar tots els usuaris")
     public ResponseEntity<List<Usuari>> getAll() {
         return ResponseEntity.ok(usuariService.getAllUsuaris());
     }
